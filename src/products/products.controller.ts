@@ -1,13 +1,18 @@
-import { Controller, Get, Inject, Req } from '@nestjs/common';
-import { ProductsService } from './products.service';
-import { Connection } from 'mongoose';
+import { Body, Controller, Get, Post } from '@nestjs/common'
+
+import { ProductsService } from './products.service'
 
 @Controller('products')
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) {}
+    constructor(private readonly productsService: ProductsService) {}
 
-  @Get()
-  getProducts() {
-    return this.productsService.getProducts();
-  }
+    @Get()
+    getProducts() {
+        return this.productsService.getProducts()
+    }
+
+    @Post()
+    createProduct(@Body() body) {
+        return this.productsService.createProduct(body)
+    }
 }
